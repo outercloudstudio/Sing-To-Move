@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://3k3qb5fkhu41"]
+
+[ext_resource type="Shader" path="res://pallete.gdshader" id="1_xqpeo"]
+[ext_resource type="PackedScene" uid="uid://bh6fg1juak05l" path="res://level.tscn" id="1_yntrr"]
+[ext_resource type="Texture2D" uid="uid://buxbbgcn1411b" path="res://slso8-1x.png" id="2_oerhg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jg27n"]
+shader = ExtResource("1_xqpeo")
+shader_parameter/palette_size = 16
+shader_parameter/palette = ExtResource("2_oerhg")
+
+[node name="Game" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_jg27n")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 8
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
+size = Vector2i(144, 81)
+render_target_update_mode = 4
+
+[node name="Level" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("1_yntrr")]
